@@ -7,7 +7,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/gollumsf/controller-action-extractor-bundle/v/unstable)](https://packagist.org/packages/gollumsf/controller-action-extractor-bundle)
 [![Discord](https://img.shields.io/discord/671741944149573687?color=purple&label=discord)](https://discord.gg/xMBc5SQ)
 
-Extract controller class and action method
+Extract controller class and action method from Request or Route
 
 ## Installation:
 
