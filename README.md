@@ -1,6 +1,6 @@
 # ControllerActionExtractorBundle
 
-[![Build Status](https://travis-ci.org/GollumSF/controller-action-extractor-bundle.svg?branch=master)](https://travis-ci.org/GollumSF/controller-action-extractor-bundle)
+[![Build Status](https://travis-ci.com/GollumSF/controller-action-extractor-bundle.svg?branch=master)](https://travis-ci.com/GollumSF/controller-action-extractor-bundle)
 [![Coverage](https://coveralls.io/repos/github/GollumSF/controller-action-extractor-bundle/badge.svg?branch=master)](https://coveralls.io/github/GollumSF/controller-action-extractor-bundle)
 [![License](https://poser.pugx.org/gollumsf/controller-action-extractor-bundle/license)](https://packagist.org/packages/gollumsf/controller-action-extractor-bundle)
 [![Latest Stable Version](https://poser.pugx.org/gollumsf/controller-action-extractor-bundle/v/stable)](https://packagist.org/packages/gollumsf/controller-action-extractor-bundle)
