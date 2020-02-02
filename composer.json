@@ -1,0 +1,44 @@
+{
+    "name": "gollumsf/controller-action-extractor-bundle",
+    "type": "symfony-bundle",
+    "description": "Extract controller class and action method",
+    "keywords" : [
+        "extractor",
+        "controller",
+        "action",
+        "request",
+        "route",
+        "symfony"
+    ],
+    "homepage": "https://github.com/GollumSF/controller-action-extractor-bundle",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Damien Duboeuf",
+            "email": "smeagolworms4@gmail.com"
+        }
+    ],
+    "support" : {
+        "email": "smeagolworms4@gmail.com",
+        "wiki": "https://github.com/GollumSF/controller-action-extractor-bundle/blob/master/README.md"
+    },
+    "require" : {
+        "symfony/http-kernel": "^4.4|^5.0",
+        "symfony/routing": "^4.4|^5.0",
+        "symfony/http-foundation": "^4.4|^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "GollumSF\\ControllerActionExtractorBundle\\" : "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\GollumSF\\ControllerActionExtractorBundle\\" : "tests/"
+        }
+    }
+}
