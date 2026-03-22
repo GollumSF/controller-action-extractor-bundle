@@ -1,4 +1,4 @@
-name: Symfony 4.4
+name: PHP 8.4
 
 on:
   push:
@@ -10,14 +10,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: ./.github/actions/test
       with:
-        symfony_version: '4.4'
-        php_version: '7.2'
+        php_version: '8.4'
         github_token: ${{ secrets.GITHUB_TOKEN }}
         discord_webhook: ${{ secrets.DISCORD_WEBHOOK }}
