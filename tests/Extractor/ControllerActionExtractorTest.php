@@ -3,6 +3,7 @@ namespace Test\GollumSF\ControllerActionExtractorBundle\Extractor;
 
 use GollumSF\ControllerActionExtractorBundle\Extractor\ControllerAction;
 use GollumSF\ControllerActionExtractorBundle\Extractor\ControllerActionExtractor;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -15,8 +16,8 @@ class StubController {
 }
 
 class ControllerActionExtractorTest extends TestCase {
-	
-	public function providerExtractFromString() {
+
+	public static function providerExtractFromString() {
 		return [
 			[ StubController::class, StubController::class, '__invoke' ],
 			[ StubController::class.'::action', StubController::class, 'action' ],
@@ -25,15 +26,11 @@ class ControllerActionExtractorTest extends TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider providerExtractFromString
-	 */
+	#[DataProvider('providerExtractFromString')]
 	public function testExtractFromString($controllerAction, $controllerClass, $action) {
 
-		$container = $this->getMockBuilder(ContainerInterface::class)
-			->getMockForAbstractClass()
-		;
-			
+		$container = $this->createMock(ContainerInterface::class);
+
 		$container
 			->method('has')
 			->with($controllerClass)
@@ -50,9 +47,7 @@ class ControllerActionExtractorTest extends TestCase {
 
 	public function testExtractFromStringService() {
 
-		$container = $this->getMockBuilder(ContainerInterface::class)
-			->getMockForAbstractClass()
-		;
+		$container = $this->createMock(ContainerInterface::class);
 
 		$container
 			->method('has')
@@ -64,7 +59,7 @@ class ControllerActionExtractorTest extends TestCase {
 			->with('serviceName')
 			->willReturn(new StubController())
 		;
-		
+
 		$controllerActionExtractor = new ControllerActionExtractor($container);
 
 		$controllerAction = $controllerActionExtractor->extractFromString(['serviceName', 'action']);
@@ -75,9 +70,7 @@ class ControllerActionExtractorTest extends TestCase {
 
 	public function testExtractFromStringNull() {
 
-		$container = $this->getMockBuilder(ContainerInterface::class)
-			->getMockForAbstractClass()
-		;
+		$container = $this->createMock(ContainerInterface::class);
 
 		$controllerActionExtractor = new ControllerActionExtractor($container);
 
@@ -87,9 +80,7 @@ class ControllerActionExtractorTest extends TestCase {
 
 	public function testExtractFromStringBad() {
 
-		$container = $this->getMockBuilder(ContainerInterface::class)
-			->getMockForAbstractClass()
-		;
+		$container = $this->createMock(ContainerInterface::class);
 
 		$controllerActionExtractor = new ControllerActionExtractor($container);
 
@@ -97,14 +88,10 @@ class ControllerActionExtractorTest extends TestCase {
 		$this->assertNull($controllerAction);
 	}
 
-	/**
-	 * @dataProvider providerExtractFromString
-	 */
+	#[DataProvider('providerExtractFromString')]
 	public function testExtractFromRoute($controllerAction, $controllerClass, $action) {
 
-		$container = $this->getMockBuilder(ContainerInterface::class)
-			->getMockForAbstractClass()
-		;
+		$container = $this->createMock(ContainerInterface::class);
 
 		$container
 			->method('has')
@@ -128,14 +115,10 @@ class ControllerActionExtractorTest extends TestCase {
 		$this->assertEquals($controllerAction->getActionMethod(), $action);
 	}
 
-	/**
-	 * @dataProvider providerExtractFromString
-	 */
+	#[DataProvider('providerExtractFromString')]
 	public function testExtractFromRequest($controllerAction, $controllerClass, $action) {
 
-		$container = $this->getMockBuilder(ContainerInterface::class)
-			->getMockForAbstractClass()
-		;
+		$container = $this->createMock(ContainerInterface::class);
 
 		$container
 			->method('has')
@@ -163,9 +146,7 @@ class ControllerActionExtractorTest extends TestCase {
 
 	public function testExtractFromRouteNull() {
 
-		$container = $this->getMockBuilder(ContainerInterface::class)
-			->getMockForAbstractClass()
-		;
+		$container = $this->createMock(ContainerInterface::class);
 
 		$route = $this->getMockBuilder(Route::class)->disableOriginalConstructor()->getMock();
 		$route
@@ -183,10 +164,8 @@ class ControllerActionExtractorTest extends TestCase {
 
 	public function testExtractFromRequestNull() {
 
-		$container = $this->getMockBuilder(ContainerInterface::class)
-			->getMockForAbstractClass()
-		;
-		
+		$container = $this->createMock(ContainerInterface::class);
+
 		$request    = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
 		$attributes = $this->getMockBuilder(ParameterBag::class)->disableOriginalConstructor()->getMock();
 		$request->attributes = $attributes;

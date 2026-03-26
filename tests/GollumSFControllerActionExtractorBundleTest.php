@@ -42,6 +42,7 @@ class GollumSFControllerActionExtractorBundleTest extends KernelTestCase {
 		return $kernel;
 	}
 
+	#[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
 	public function testInitBundle() {
 
 		self::bootKernel(['config' => function (TestKernel $kernel) {
@@ -66,5 +67,6 @@ class GollumSFControllerActionExtractorBundleTest extends KernelTestCase {
 
 		$this->assertInstanceOf(ControllerActionExtractorInterface::class, $container->get(ControllerActionExtractorInterface::class));
 		$this->assertInstanceOf(ControllerActionExtractor::class, $container->get(ControllerActionExtractorInterface::class));
+
 	}
 }
