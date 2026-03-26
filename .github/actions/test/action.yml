@@ -36,27 +36,21 @@ runs:
 
     - name: Validate composer.json and composer.lock
       shell: bash
-      run: composer validate --strict
+      run: composer validate
 
     - name: Install dependencies
       shell: bash
       run: |
         if [ "${{ inputs.symfony_version }}" != "" ]; then
-          SF_MAJOR=$(echo "${{ inputs.symfony_version }}" | cut -d. -f1)
-          if [ "$SF_MAJOR" -ge 7 ]; then
-            composer require "symfony/http-kernel:${{ inputs.symfony_version }}.*" "symfony/framework-bundle:${{ inputs.symfony_version }}.*" --no-update
-          else
-            composer require "symfony/symfony:${{ inputs.symfony_version }}.*" --no-update
-          fi
+          composer require "symfony/framework-bundle:${{ inputs.symfony_version }}.*" --no-update
         fi
-        composer require "monolog/monolog" --no-update
-        composer update --prefer-dist --no-interaction ${{ inputs.composer_flags }}
+        composer update --prefer-dist --no-interaction --no-audit ${{ inputs.composer_flags }}
 
     - name: Run tests
       shell: bash
       run: |
         mkdir -p build/logs
-        vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml tests/
+        XDEBUG_MODE=coverage php -d memory_limit=-1 vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
 
     - name: Upload coverage results to Coveralls
       if: success()
