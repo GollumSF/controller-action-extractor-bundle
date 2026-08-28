@@ -6,7 +6,6 @@ use GollumSF\ControllerActionExtractorBundle\Extractor\ControllerActionExtractor
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
 
@@ -126,15 +125,7 @@ class ControllerActionExtractorTest extends TestCase {
 			->willReturn(false)
 		;
 
-		$request    = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-		$attributes = $this->getMockBuilder(ParameterBag::class)->disableOriginalConstructor()->getMock();
-		$request->attributes = $attributes;
-		$attributes
-			->expects($this->once())
-			->method('get')
-			->with('_controller')
-			->willReturn($controllerAction)
-		;
+		$request = new Request([], [], [ '_controller' => $controllerAction ]);
 
 		$controllerActionExtractor = new ControllerActionExtractor($container);
 
@@ -166,15 +157,7 @@ class ControllerActionExtractorTest extends TestCase {
 
 		$container = $this->createMock(ContainerInterface::class);
 
-		$request    = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-		$attributes = $this->getMockBuilder(ParameterBag::class)->disableOriginalConstructor()->getMock();
-		$request->attributes = $attributes;
-		$attributes
-			->expects($this->once())
-			->method('get')
-			->with('_controller')
-			->willReturn(null)
-		;
+		$request = new Request();
 
 		$controllerActionExtractor = new ControllerActionExtractor($container);
 
